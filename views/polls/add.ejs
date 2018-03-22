@@ -1,0 +1,57 @@
+<div class="card card-body">
+  <h3>Add Poll</h3>
+  <form action="/polls" method="post">
+    <div class="input_fields_wrap">
+      <div class="form-group">
+        <label for="question">Question</label>
+        <input type="text" class="form-control" name="question" required>
+      </div>
+
+      <div class="form-group">
+        <label for="opt1">Options</label>
+        <input class="form-control" name="option" required>
+        <button type="button" class="btn btn-default addButton">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+
+      <div class="form-group">
+        <input class="form-control" name="option" required>
+        <button type="button" class="btn btn-default addButton">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" id="add" class="btn btn-success">Add Option</button>
+    </div>
+
+  </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function () {
+    const max_options = 5;
+    let inital_count = 2;
+    let wrapper = $('.input_fields_wrap');
+
+    $('#add').on('click', function (e) {
+      e.preventDefault();
+
+      if (inital_count < max_options) {
+        inital_count++;
+        $('.input_fields_wrap').append('<div class="form-group"><input class="form-control" name="option"><button type="button" href="#" class="btn btn-warning remove_field">Remove</button> </div>')
+      } else {
+        // INSERT ERROR MESSAGE
+      }
+    });
+
+    $(wrapper).on('click', '.remove_field', function (e) {
+      e.preventDefault();
+      $(this).parent('div').remove();
+      inital_count--;
+    })
+  });
+</script>
